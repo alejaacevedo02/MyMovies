@@ -1,3 +1,5 @@
 package com.alejandraacevedo.mymovies
 
-data class Movie()
+import android.icu.text.CaseMap
+
+data class Movie(val title: String, val coverImage : String)
