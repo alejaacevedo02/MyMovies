@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.alejandraacevedo.mymovies.databinding.ViewMovieItemBinding
 import com.bumptech.glide.Glide
 
-class MoviesAdapter(private val movies: List<Movie>, private val movieClickListener: MovieClickListener) : RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
+class MoviesAdapter(private val movies: List<Movie>, private val movieClickListener: (Movie) -> Unit) : RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ViewMovieItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
@@ -16,7 +16,7 @@ class MoviesAdapter(private val movies: List<Movie>, private val movieClickListe
         val movie = movies[position]
         holder.bind(movie)
         holder.itemView.setOnClickListener{
-            movieClickListener.onMovieClicked(movie)
+            movieClickListener(movie)
         }
     }
 
@@ -30,8 +30,4 @@ class MoviesAdapter(private val movies: List<Movie>, private val movieClickListe
                     .into(binding.coverPhoto)
         }
     }
-}
-
-interface MovieClickListener{
-    fun onMovieClicked(movie: Movie)
 }
