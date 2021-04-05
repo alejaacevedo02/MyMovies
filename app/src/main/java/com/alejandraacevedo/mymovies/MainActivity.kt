@@ -5,7 +5,9 @@ import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
 import androidx.appcompat.app.AppCompatActivity
 import com.alejandraacevedo.mymovies.databinding.ActivityMainBinding
+import com.alejandraacevedo.mymovies.service.MovieDbClient
 import timber.log.Timber
+import kotlin.concurrent.thread
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,6 +26,14 @@ class MainActivity : AppCompatActivity() {
             Toast
                     .makeText(this@MainActivity, movie.title, Toast.LENGTH_SHORT)
                     .show()
+        }
+
+        thread {
+            val apiKey = getString(R.string.api_key)
+            val popularMovies = MovieDbClient.service.listPopularMovies(apiKey)
+            val body = popularMovies.execute().body()
+            if (body != null)
+            Timber.d(" Movie count : ${body.results.size}")
         }
 
     }
