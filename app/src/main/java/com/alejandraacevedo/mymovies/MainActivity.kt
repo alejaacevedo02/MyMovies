@@ -4,8 +4,12 @@ import android.os.Bundle
 import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.alejandraacevedo.mymovies.databinding.ActivityMainBinding
 import com.alejandraacevedo.mymovies.service.MovieDbClient
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import timber.log.Timber
 import kotlin.concurrent.thread
 
@@ -22,19 +26,12 @@ class MainActivity : AppCompatActivity() {
         }
         binding.moviesRv.adapter = moviesAdapter
 
-        thread {
+        lifecycleScope.launch {
             val apiKey = getString(R.string.api_key)
             val popularMovies = MovieDbClient.service.listPopularMovies(apiKey)
-            val body = popularMovies.execute().body()
-
-            runOnUiThread{
-                if (body != null) {
-                    moviesAdapter.movies = body.results
-                    moviesAdapter.notifyDataSetChanged()
-                }
-            }
+            moviesAdapter.movies = popularMovies.results
+            moviesAdapter.notifyDataSetChanged()
         }
-
     }
 
     override fun onDestroy() {
