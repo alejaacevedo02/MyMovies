@@ -15,25 +15,24 @@ class MainActivity : AppCompatActivity() {
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.moviesRv.adapter = MoviesAdapter(listOf(
-                Movie("Title 1", "https://loremflickr.com/320/240?lock=1"),
-                Movie("Title 2", "https://loremflickr.com/320/240?lock=2"),
-                Movie("Title 3", "https://loremflickr.com/320/240?lock=3"),
-                Movie("Title 4", "https://loremflickr.com/320/240?lock=4"),
-                Movie("Title 5", "https://loremflickr.com/320/240?lock=5"),
-                Movie("Title 6", "https://loremflickr.com/320/240?lock=6")
-        )) { movie ->
+        val moviesAdapter = MoviesAdapter(emptyList()) { movie ->
             Toast
                     .makeText(this@MainActivity, movie.title, Toast.LENGTH_SHORT)
                     .show()
         }
+        binding.moviesRv.adapter = moviesAdapter
 
         thread {
             val apiKey = getString(R.string.api_key)
             val popularMovies = MovieDbClient.service.listPopularMovies(apiKey)
             val body = popularMovies.execute().body()
-            if (body != null)
-            Timber.d(" Movie count : ${body.results.size}")
+
+            runOnUiThread{
+                if (body != null) {
+                    moviesAdapter.movies = body.results
+                    moviesAdapter.notifyDataSetChanged()
+                }
+            }
         }
 
     }
