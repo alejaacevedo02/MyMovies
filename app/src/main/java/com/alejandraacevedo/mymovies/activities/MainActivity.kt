@@ -1,9 +1,12 @@
-package com.alejandraacevedo.mymovies
+package com.alejandraacevedo.mymovies.activities
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.alejandraacevedo.mymovies.EXTRA_MOVIE
+import com.alejandraacevedo.mymovies.adapter.MoviesAdapter
+import com.alejandraacevedo.mymovies.R
 import com.alejandraacevedo.mymovies.databinding.ActivityMainBinding
 import com.alejandraacevedo.mymovies.model.Movie
 import com.alejandraacevedo.mymovies.service.MovieDbClient

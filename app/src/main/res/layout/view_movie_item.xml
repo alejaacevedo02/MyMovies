@@ -7,11 +7,12 @@
     android:orientation="vertical"
     android:padding="2dp">
 
-    <ImageView
+    <com.alejandraacevedo.mymovies.customviews.AspectRatioImageView
         android:id="@+id/cover_photo"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
         android:scaleType="centerCrop"
+        app:ratio="1.5"
         app:srcCompat="@drawable/ic_launcher_foreground" />
 
     <TextView
