@@ -28,7 +28,19 @@ class DetailActivity : AppCompatActivity() {
     private fun bindDetailInfo(detailInfo: TextView, movie: Movie) {
         detailInfo.text = buildSpannedString {
             bold { append("Original language : ") }
-            appendLine(" ${movie.original_language}")
+            appendLine(movie.original_language)
+
+            bold { append("Original title : ") }
+            appendLine(movie.original_title)
+
+            bold { append("Release date : ") }
+            appendLine(movie.release_date)
+
+            bold { append("Popularity : ") }
+            appendLine(movie.popularity.toString())
+
+            bold{ append("Vote average : ")}
+            appendLine(movie.vote_average.toString())
         }
     }
 }
