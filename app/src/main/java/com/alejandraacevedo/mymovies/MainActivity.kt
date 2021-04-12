@@ -2,18 +2,13 @@ package com.alejandraacevedo.mymovies
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
-import android.widget.Toast.LENGTH_SHORT
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.alejandraacevedo.mymovies.databinding.ActivityMainBinding
 import com.alejandraacevedo.mymovies.model.Movie
 import com.alejandraacevedo.mymovies.service.MovieDbClient
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import timber.log.Timber
-import kotlin.concurrent.thread
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
