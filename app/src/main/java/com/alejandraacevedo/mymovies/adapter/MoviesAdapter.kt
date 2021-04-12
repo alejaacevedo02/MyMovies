@@ -1,4 +1,4 @@
-package com.alejandraacevedo.mymovies
+package com.alejandraacevedo.mymovies.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

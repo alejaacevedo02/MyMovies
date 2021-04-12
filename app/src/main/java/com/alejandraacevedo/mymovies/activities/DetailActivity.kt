@@ -1,10 +1,11 @@
-package com.alejandraacevedo.mymovies
+package com.alejandraacevedo.mymovies.activities
 
 import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.bold
 import androidx.core.text.buildSpannedString
+import com.alejandraacevedo.mymovies.EXTRA_MOVIE
 import com.alejandraacevedo.mymovies.databinding.ActivityDetailBinding
 import com.alejandraacevedo.mymovies.model.Movie
 import com.bumptech.glide.Glide
