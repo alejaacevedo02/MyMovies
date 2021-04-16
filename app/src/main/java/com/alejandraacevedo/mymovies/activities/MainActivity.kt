@@ -1,7 +1,12 @@
 package com.alejandraacevedo.mymovies.activities
 
+import android.Manifest
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.alejandraacevedo.mymovies.EXTRA_MOVIE
@@ -14,6 +19,18 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 
 class MainActivity : AppCompatActivity() {
+    @RequiresApi(Build.VERSION_CODES.M)
+    private val requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
+        val message =
+                when {
+                    isGranted -> "Permission Granted"
+                    shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_COARSE_LOCATION) -> " Should Show Rationale"
+                    else -> "Permission rejected"
+                }
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityMainBinding.inflate(layoutInflater)
@@ -23,6 +40,8 @@ class MainActivity : AppCompatActivity() {
             navigateTo(movie)
         }
         binding.moviesRv.adapter = moviesAdapter
+
+        requestPermissionLauncher.launch(Manifest.permission.ACCESS_COARSE_LOCATION)
 
         lifecycleScope.launch {
             val apiKey = getString(R.string.api_key)
