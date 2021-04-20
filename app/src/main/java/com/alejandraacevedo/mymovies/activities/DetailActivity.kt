@@ -3,6 +3,7 @@ package com.alejandraacevedo.mymovies.activities
 import android.os.Bundle
 import android.text.SpannableStringBuilder
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.bold
 import androidx.core.text.buildSpannedString
@@ -29,6 +30,9 @@ class DetailActivity : AppCompatActivity() {
                     .into(binding.backdrop)
             binding.summaryDetail.text = movie.overview
             bindDetailInfo(binding.detailInfo, movie)
+        }
+        binding.fab.setOnClickListener{
+            Toast.makeText(this, "${movie?.title} is your fav <3", Toast.LENGTH_SHORT).show()
         }
     }
 
