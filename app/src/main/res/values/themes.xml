@@ -18,4 +18,9 @@
     <!--  <style name="textViewStyle" parent="Widget.MaterialComponents.TextView">
          <item name="android:textSize">36sp</item>
      </style> -->
+    <!-- Have a theme without the actionBar Showing-->
+    <style name="Theme.MyMovies.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
 </resources>
