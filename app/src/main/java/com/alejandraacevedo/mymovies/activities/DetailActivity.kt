@@ -16,7 +16,11 @@ class DetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityDetailBinding.inflate(layoutInflater)
+
         setContentView(binding.root)
+        setSupportActionBar(binding.toolbarDetails)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         val movie = intent.getParcelableExtra<Movie>(EXTRA_MOVIE)
         movie?.let {
             title = movie.title
